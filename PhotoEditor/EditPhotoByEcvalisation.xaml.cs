@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Globalization;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using PhotoEditor.OptimisationDTO;
 
 namespace PhotoEditor;
 
@@ -20,7 +19,7 @@ public partial class EditPhotoByEcvalisation : Page
     
     private void LimiterEditorValue_OnValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
     {
-        OptimisationDTO.Сache.FillEditedMap(editorLimiter(OptimisationDTO.Сache.getOriginalBytesMassive(), LimiterEditorValue.Value));
+        Сache.FillEditedMap(editorLimiter(Сache.getOriginalBytesMassive(), LimiterEditorValue.Value));
         UpdatePhotoPreview();
     }
     private byte[] editorLimiter(byte[] originalByteMap, double limiterPorog)
@@ -42,14 +41,14 @@ public partial class EditPhotoByEcvalisation : Page
                 result[value + 2] = 254;
             }
         }
-        OptimisationDTO.Сache.FillEditedMap(result);
+        Сache.FillEditedMap(result);
         return result;
     }
 
     
     private void BrightnessEditorValue_OnValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
     {
-        OptimisationDTO.Сache.FillEditedMap(editorBrightness(OptimisationDTO.Сache.getOriginalBytesMassive(), BrightnessEditorValue.Value));
+        Сache.FillEditedMap(editorBrightness(Сache.getOriginalBytesMassive(), BrightnessEditorValue.Value));
         //OptimisationDTO.Сache.FillEditedMap(editorBrightness(OptimisationDTO.Сache.getOriginalBytesMassive(), 200));
         UpdatePhotoPreview();
     }
@@ -85,14 +84,14 @@ public partial class EditPhotoByEcvalisation : Page
                 result[value + 2] = (byte)(originalByteMap[value + 2] + neededBrightness);
             }
         }
-        OptimisationDTO.Сache.FillEditedMap(result);
+        Сache.FillEditedMap(result);
         return result;
     }
     
     private void UpdatePhotoPreview()
     {
-        byte[] headers = OptimisationDTO.Сache.getBMPHeaders();
-        byte[] body = OptimisationDTO.Сache.getEditedBytesMassive();
+        byte[] headers = Сache.getBMPHeaders();
+        byte[] body = Сache.getEditedBytesMassive();
         byte[] resultedMap = new byte[headers.Length + body.Length];
         Array.Copy(headers, resultedMap, 54);
         Array.Copy(body, 0, resultedMap, 54, body.Length);
@@ -113,8 +112,8 @@ public partial class EditPhotoByEcvalisation : Page
     
     private void UpdatePhotoPreviewWithCmyk()
     {
-        byte[] headers = OptimisationDTO.Сache.getBMPHeaders();
-        byte[] body = OptimisationDTO.Сache.getEditedBytesMassive();
+        byte[] headers = Сache.getBMPHeaders();
+        byte[] body = Сache.getEditedBytesMassive();
         byte[] resultedMap = new byte[headers.Length + body.Length];
         Array.Copy(headers, resultedMap, 54);
         Array.Copy(body, 0, resultedMap, 54, body.Length);

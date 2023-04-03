@@ -1,6 +1,4 @@
-﻿using System.Windows.Media.Imaging;
-
-namespace PhotoEditor;
+﻿namespace PhotoEditor;
 
 public class Convertor
 {
