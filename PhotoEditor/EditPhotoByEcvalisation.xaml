@@ -51,6 +51,21 @@
                                HorizontalAlignment="Center"/>
                 </Border>    
             </StackPanel>
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Center"
+                        Margin="0,0,0,15">
+                <TextBlock FontSize="14" Text="Адаптивность графика"/>
+                <Border Width="20"
+                        Height="20"
+                        CornerRadius="10"
+                        Background="Red"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Center"
+                        Margin="10,0,0,0"
+                        Name="ButtonMode"
+                        MouseUp="ButtonMode_OnMouseUp"
+                        Cursor="Hand"/>
+            </StackPanel>
             <Border Width="130"
                     Height="20"
                     Background="#B1F5AF"

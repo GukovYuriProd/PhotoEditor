@@ -13,6 +13,7 @@ namespace PhotoEditor;
 
 public partial class EditPhotoByEcvalisation : Page
 {
+    private static bool mode = false;
     public EditPhotoByEcvalisation()
     {
         InitializeComponent();
@@ -24,7 +25,7 @@ public partial class EditPhotoByEcvalisation : Page
     {
         Сache.FillEditedMap(editorLimiter(Сache.getOriginalBytesMassive(), LimiterEditorValue.Value));
         GrapgColumns.Children.Clear();
-        drawGraph();
+        drawGraph(mode);
         UpdatePhotoPreview();
     }
 
@@ -32,7 +33,7 @@ public partial class EditPhotoByEcvalisation : Page
     {
         Сache.FillEditedMap(editorBrightness(Сache.getOriginalBytesMassive(), BrightnessEditorValue.Value));
         GrapgColumns.Children.Clear();
-        drawGraph();
+        drawGraph(mode);
         UpdatePhotoPreview();
     }
     
@@ -48,7 +49,7 @@ public partial class EditPhotoByEcvalisation : Page
         return result;
     }
     
-    private void drawGraph()
+    private void drawGraph(bool mode)
     {
         //GraphColumns - stackpanel for this shit
         List<double> values = new List<double>();
@@ -61,7 +62,12 @@ public partial class EditPhotoByEcvalisation : Page
         for (int value = 0; value < 256; value++) values.Add(brightness[value]);
         for (int indexValue = 0; indexValue < 256; indexValue++)
         {
-            double MaxValueStatistics = values.Max();
+            double MaxValueStatistics;
+            if (mode)
+            {
+                MaxValueStatistics = values.Max();
+            } else MaxValueStatistics = 2550;
+            
             Border column = new Border
             {
                 Height = 280 * (values[indexValue]/MaxValueStatistics),
@@ -183,5 +189,22 @@ public partial class EditPhotoByEcvalisation : Page
     {
         ((sender as Border)!).BorderThickness = new Thickness(0);
         ((sender as Border)!).BorderBrush = new SolidColorBrush(Colors.Transparent);
+    }
+
+
+    private void ButtonMode_OnMouseUp(object sender, MouseButtonEventArgs e)
+    {
+        if (mode)
+        {
+            mode = false;
+            ButtonMode.Background = new SolidColorBrush(Colors.Red);
+        }
+        else
+        {
+            mode = true;
+            ButtonMode.Background = new SolidColorBrush(Colors.Green);
+        }
+        GrapgColumns.Children.Clear();
+        drawGraph(mode);
     }
 }
