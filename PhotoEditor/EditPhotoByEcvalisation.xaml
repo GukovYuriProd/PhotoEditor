@@ -15,7 +15,7 @@
             <TextBlock FontSize="14"
                        Text="Выберите вид обработки фотографии"
                        HorizontalAlignment="Center"></TextBlock>
-            <StackPanel Orientation="Horizontal">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                 <Slider Minimum="0" 
                         Name="LimiterEditorValue"
                         Maximum="254"
@@ -27,14 +27,13 @@
                         Height="20"
                         Background="#B1F5AF"
                         CornerRadius="5"
-                        Margin="0,15,0,0"
-                        Cursor="Hand">
+                        Margin="0,15,0,0">
                     <TextBlock FontSize="14"
                                Text="Лимитер по яркости"
                                HorizontalAlignment="Center"/>
                 </Border>    
             </StackPanel>
-            <StackPanel Orientation="Horizontal">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                 <Slider Minimum="0" 
                         Name="BrightnessEditorValue"
                         Maximum="100"
@@ -46,15 +45,52 @@
                         Height="20"
                         Background="#B1F5AF"
                         CornerRadius="5"
-                        Margin="0,15,0,15"
-                        Cursor="Hand">
+                        Margin="0,15,0,15">
                     <TextBlock FontSize="14"
                                Text="Яркость"
                                HorizontalAlignment="Center"/>
                 </Border>    
             </StackPanel>
-            <Image Name="EditedImagePreview"
-                   Margin="0,30,0,0"/>
+            <Border Width="130"
+                    Height="20"
+                    Background="#B1F5AF"
+                    CornerRadius="5"
+                    Margin="0,0,0,15"
+                    Cursor="Hand"
+                    Name="Ecualise"
+                    MouseUp="Ecualise_OnMouseUp"
+                    MouseEnter="Ecualise_OnMouseEnter"
+                    MouseLeave="Ecualise_OnMouseLeave">
+                <TextBlock HorizontalAlignment="Center"
+                           Text="Эквализация"
+                           FontSize="14"/>
+            </Border>
+            <StackPanel Orientation="Horizontal">
+                <Image Name="EditedImagePreview"/>
+                <StackPanel Orientation="Vertical"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center"
+                            Margin="50,0,0,0">
+                    <TextBox Text="Бимодальная гистограмма яркости"
+                             HorizontalAlignment="Center"
+                             FontWeight="Thin"
+                             FontSize="20"
+                             Margin="0,0,0,2"
+                             BorderThickness="0"
+                             BorderBrush="Transparent"/>
+                    <Border Width="550"
+                            Height="350"
+                            BorderThickness="1"
+                            BorderBrush="Black">
+                        <StackPanel Orientation="Horizontal"
+                                    HorizontalAlignment="Center"
+                                    Name="GrapgColumns"
+                                    Margin="10,10,10,0">
+                
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+            </StackPanel>
         </StackPanel>
     </Grid>
 </Page>

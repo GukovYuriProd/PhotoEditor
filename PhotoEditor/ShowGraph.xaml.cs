@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using PhotoEditor.OptimisationDTO;
 
 namespace PhotoEditor;
 
@@ -17,11 +17,11 @@ public partial class ShowGraph : Page
         drawGraph();
     }
 
-    private async void drawGraph()
+    private void drawGraph()
     {
         //GraphColumns - stackpanel for this shit
         List<double> values = new List<double>();
-        List<Pixel> pixels = OptimisationDTO.Сache.getPixelMap();
+        List<Pixel> pixels = Сache.getPixelMap();
         int[] brightness = new int[256];
         foreach (var t in pixels)
         {

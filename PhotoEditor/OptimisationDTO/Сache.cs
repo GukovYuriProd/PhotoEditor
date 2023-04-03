@@ -26,7 +26,19 @@ public static class Сache
             pixelMap.Add(new Pixel(fileBytesMassive[i+2], fileBytesMassive[i+1], fileBytesMassive[i]));
         }
     }
-    
+
+    public static List<Pixel> getTempPixelMap()
+    {
+        List<Pixel> resultTempMap = new List<Pixel>();
+        for (int index = 0; index < editedBytesMassive.Length; index += 3)
+        {
+            resultTempMap.Add(new Pixel(editedBytesMassive[index + 2], 
+                editedBytesMassive[index + 1], 
+                editedBytesMassive[index]));
+        }
+
+        return resultTempMap;
+    }
     public static List<Pixel> getPixelMap() { return pixelMap; }
     public static byte[] getBMPHeaders() { return BMPfileHeaders; }
     public static byte[] getOriginalBytesMassive() { return originalMassive; }
