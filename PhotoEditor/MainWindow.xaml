@@ -1,0 +1,136 @@
+﻿<Window x:Class="PhotoEditor.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="Image editor" 
+        Height="650" 
+        Width="700"
+        MinHeight="450"
+        MinWidth="800"
+        WindowStyle="ThreeDBorderWindow"
+        WindowStartupLocation="CenterScreen">
+    <Grid>
+        <!-- Color for button indication is 2269F7-->
+        <!-- Color for button without ind is F8F8FA-->
+        <Grid.ColumnDefinitions>
+             <ColumnDefinition Width="42px"/>
+             <ColumnDefinition Width="*"/>
+         </Grid.ColumnDefinitions>
+         <Grid Grid.Column="0"
+               Background="#F8F8FA">
+             <StackPanel Orientation="Vertical"
+                         VerticalAlignment="Center">
+                 <Border Height="28"
+                         Width="28"
+                         CornerRadius="5"
+                         Background="#F8F8FA"
+                         Name="InputPicture"
+                         Margin="0,0,0,8"
+                         Cursor="Hand"
+                         MouseEnter="InputPicture_OnMouseEnter"
+                         MouseLeave="InputPicture_OnMouseLeave"
+                         MouseUp="InputPicture_OnMouseUp">
+                     <Image Source="D:\CodeProds\PhotoEditor\PhotoEditor\Icons\input.png"
+                            Height="18"
+                            Width="18"
+                            Opacity="0.8"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center"/>
+                 </Border>
+                 <Border Height="28"
+                         Width="28"
+                         CornerRadius="5"
+                         Background="#F8F8FA"
+                         Name="ShowPicture"
+                         Margin="0,0,0,8"
+                         Cursor="Hand"
+                         MouseEnter="ShowPicture_OnMouseEnter"
+                         MouseLeave="ShowPicture_OnMouseLeave"
+                         MouseUp="ShowPicture_OnMouseUp">
+                         <Image Source="D:\CodeProds\PhotoEditor\PhotoEditor\Icons\show.png"
+                                Height="18"
+                                Width="18"
+                                Opacity="0.8"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Center"/>
+                 </Border>
+                 <Border Height="28"
+                         Width="28"
+                         CornerRadius="5"
+                         Background="#F8F8FA"
+                         Name="Settings"
+                         Margin="0,0,0,8"
+                         Cursor="Hand"
+                         MouseEnter="Settings_OnMouseEnter"
+                         MouseLeave="Settings_OnMouseLeave"
+                         MouseUp="Settings_OnMouseUp">
+                     <Image Source="D:\CodeProds\PhotoEditor\PhotoEditor\Icons\setting.png"
+                            Height="18"
+                            Width="18"
+                            Opacity="0.8"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center"/>
+                 </Border>
+                 <Border Height="28"
+                         Width="28"
+                         CornerRadius="5"
+                         Background="#F8F8FA"
+                         Name="Graph"
+                         Margin="0,0,0,8"
+                         Cursor="Hand"
+                         MouseEnter="Graph_OnMouseEnter"
+                         MouseLeave="Graph_OnMouseLeave"
+                         MouseUp="Graph_OnMouseUp">
+                     <Image Source="D:\CodeProds\PhotoEditor\PhotoEditor\Icons\graph.png"
+                            Height="18"
+                            Width="18"
+                            Opacity="0.8"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center"/>
+                 </Border>
+                 <Border Height="28"
+                         Width="28"
+                         CornerRadius="5"
+                         Background="#F8F8FA"
+                         Name="Edited"
+                         Margin="0,0,0,8"
+                         Cursor="Hand"
+                         MouseEnter="Edited_OnMouseEnter"
+                         MouseLeave="Edited_OnMouseLeave"
+                         MouseUp="Edited_OnMouseUp">
+                     <Image Source="D:\CodeProds\PhotoEditor\PhotoEditor\Icons\edited.png"
+                            Height="18"
+                            Width="18"
+                            Opacity="0.8"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center"/>
+                 </Border>
+                 <Border Height="28"
+                         Width="28"
+                         CornerRadius="5"
+                         Background="#F8F8FA"
+                         Name="Save"
+                         Margin="0,0,0,8"
+                         Cursor="Hand"
+                         MouseEnter="Save_OnMouseEnter"
+                         MouseLeave="Save_OnMouseLeave"
+                         MouseUp="Save_OnMouseUp">
+                     <Image Source="D:\CodeProds\PhotoEditor\PhotoEditor\Icons\save.png"
+                            Height="18"
+                            Width="18"
+                            Opacity="0.8"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center"/>
+                 </Border>
+             </StackPanel>
+         </Grid>
+        <Grid Grid.Column="1">
+            <Frame x:Name="WorkArea"
+                   Width="auto"
+                   Height="auto"
+                   NavigationUIVisibility="Hidden"/>
+        </Grid>
+    </Grid>
+</Window>

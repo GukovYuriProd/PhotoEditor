@@ -1,0 +1,52 @@
+﻿<Page x:Class="PhotoEditor.FileImporting"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:local="clr-namespace:PhotoEditor"
+      mc:Ignorable="d"
+      Title="FileImporting" 
+      d:DesignHeight="*"
+      d:DesignWidth = "*">
+    <Grid Background="Transparent"
+          HorizontalAlignment="Center"
+          VerticalAlignment="Center">
+        <Border Width="200"
+                Height="Auto"
+                Background="LightCyan"
+                CornerRadius="20">
+            <StackPanel Orientation="Vertical"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Margin="0,25,0,25"
+                        Name="ImageEnteringPanel">
+                <Label Content="Добавьте файл картинки"
+                       FontSize="15"
+                       FontStyle="Normal"
+                       FontStretch="Medium"
+                       FontWeight="Thin"
+                       HorizontalAlignment="Center"/>
+                <Border Height="20"
+                        Name="AddImage"
+                        Width="120"
+                        Margin="0,20,0,20"
+                        Background="#F8F8FA"
+                        BorderThickness="1"
+                        BorderBrush="Bisque"
+                        CornerRadius="5"
+                        MouseEnter="AddImage_OnMouseEnter"
+                        MouseLeave="AddImage_OnMouseLeave"
+                        MouseDown="AddImage_OnMouseDown"
+                        Cursor="Hand">
+                    <TextBlock FontSize="13"
+                               Margin="0,0,0,2"
+                               FontWeight="Thin"
+                               Text="Добавить"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Center"/>
+                </Border>
+                <Image Name="localImagePreview"/>
+            </StackPanel>
+        </Border>
+    </Grid>
+</Page>
