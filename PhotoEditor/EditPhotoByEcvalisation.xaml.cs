@@ -36,16 +36,60 @@ public partial class EditPhotoByEcvalisation : Page
         drawGraph(mode);
         UpdatePhotoPreview();
     }
-    
-    private void Ecualise_OnMouseUp(object sender, MouseButtonEventArgs e)
+
+    private void AdaptiveBrightness_OnValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
     {
-        Сache.FillEditedMap(graphNormiliser(Сache.getOriginalBytesMassive(), 1));
+        Сache.FillEditedMap(graphNormiliser(Сache.getOriginalBytesMassive(), AdaptiveBrightness.Value));
+        GrapgColumns.Children.Clear();
+        drawGraph(mode);
+        UpdatePhotoPreview();
     }
     
     private byte[] graphNormiliser(byte[] originalByteMap, double coeff)
     {
+        List<Pixel> origin = OptimisationDTO.Сache.getPixelMap();
         byte[] result = new byte[originalByteMap.Length];
+        double resultedCoeff = coeff / 100;
+
+        double averageBrightness = 0;
+        for (int i = 0; i < origin.Count; i++) averageBrightness += origin[i].getBrightness();
+        averageBrightness = averageBrightness / origin.Count;
         
+        for (int value = 0; value < originalByteMap.Length; value+=3)
+        {
+            Pixel tempPixel = origin[value / 3];
+
+            double tempBrightness = tempPixel.getBrightness();
+            double neededBrightness = averageBrightness - tempBrightness;
+            neededBrightness *= resultedCoeff;
+            
+            int B = tempPixel.getBlue();
+            int G = tempPixel.getGreen();
+            int R = tempPixel.getRed();
+
+            if ((B + neededBrightness < 1)||(G + neededBrightness < 1)||(R + neededBrightness < 1))
+            {
+                byte minimalValue = Math.Min(Math.Min(originalByteMap[value+0],originalByteMap[value+1]),originalByteMap[value+2]);
+                result[value + 0] = (byte)(tempPixel.getBlue() - minimalValue);
+                result[value + 1] = (byte)(tempPixel.getGreen() - minimalValue);
+                result[value + 2] = (byte)(tempPixel.getRed() - minimalValue);
+            } else if ((B + neededBrightness > 255)||(G + neededBrightness > 255)||(R + neededBrightness > 255))
+            {
+                int maximun = Math.Max(Math.Max(originalByteMap[value+0],originalByteMap[value+1]),originalByteMap[value+2]);
+                int delay = 255 - maximun;
+                result[value + 0] = (byte)(tempPixel.getBlue() + delay);
+                result[value + 1] = (byte)(tempPixel.getGreen() + delay);
+                result[value + 2] = (byte)(tempPixel.getRed() + delay);
+            }
+            else
+            {
+                result[value + 0] = (byte)(tempPixel.getBlue() + neededBrightness);
+                result[value + 1] = (byte)(tempPixel.getGreen() + neededBrightness);
+                result[value + 2] = (byte)(tempPixel.getRed() + neededBrightness);
+            }
+            
+        }
+
         return result;
     }
     
@@ -163,19 +207,7 @@ public partial class EditPhotoByEcvalisation : Page
         EditedImagePreview.Height = 350;
         EditedImagePreview.Stretch = Stretch.Fill;
     }
-    
-    
 
-    private void Ecualise_OnMouseEnter(object sender, MouseEventArgs e)
-    {
-        Ecualise.Background = new SolidColorBrush(Color.FromRgb(148,162,245));
-    }
-
-    private void Ecualise_OnMouseLeave(object sender, MouseEventArgs e)
-    {
-        Ecualise.Background = new SolidColorBrush(Color.FromRgb(177,245,175));
-    }
-    
     private void getCoumntInfo(object sender, RoutedEventArgs e)
     {
         MessageBox.Show(((FrameworkElement)e.OriginalSource).ToolTip.ToString());
@@ -207,4 +239,6 @@ public partial class EditPhotoByEcvalisation : Page
         GrapgColumns.Children.Clear();
         drawGraph(mode);
     }
+
+    
 }
