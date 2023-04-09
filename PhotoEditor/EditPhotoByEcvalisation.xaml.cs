@@ -13,7 +13,7 @@ namespace PhotoEditor;
 
 public partial class EditPhotoByEcvalisation : Page
 {
-    private static bool mode = false;
+    private static bool GraphIsAdaptive = false;
     public EditPhotoByEcvalisation()
     {
         InitializeComponent();
@@ -21,11 +21,20 @@ public partial class EditPhotoByEcvalisation : Page
         BrightnessEditorValue.Value = 50;
     }
     
+    private void RealStatisticsEcualisation_OnMouseUp(object sender, MouseButtonEventArgs e)
+    {
+        Сache.FillEditedMap(statisticsNormiliser(Сache.getOriginalBytesMassive()));
+        GrapgColumns.Children.Clear();
+        drawGraph(GraphIsAdaptive);
+        UpdatePhotoPreview();
+        MessageBox.Show("IT's WORKS");
+    }
+    
     private void LimiterEditorValue_OnValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
     {
         Сache.FillEditedMap(editorLimiter(Сache.getOriginalBytesMassive(), LimiterEditorValue.Value));
         GrapgColumns.Children.Clear();
-        drawGraph(mode);
+        drawGraph(GraphIsAdaptive);
         UpdatePhotoPreview();
     }
 
@@ -33,7 +42,7 @@ public partial class EditPhotoByEcvalisation : Page
     {
         Сache.FillEditedMap(editorBrightness(Сache.getOriginalBytesMassive(), BrightnessEditorValue.Value));
         GrapgColumns.Children.Clear();
-        drawGraph(mode);
+        drawGraph(GraphIsAdaptive);
         UpdatePhotoPreview();
     }
 
@@ -41,13 +50,27 @@ public partial class EditPhotoByEcvalisation : Page
     {
         Сache.FillEditedMap(graphNormiliser(Сache.getOriginalBytesMassive(), AdaptiveBrightness.Value));
         GrapgColumns.Children.Clear();
-        drawGraph(mode);
+        drawGraph(GraphIsAdaptive);
         UpdatePhotoPreview();
+    }
+
+    private byte[] statisticsNormiliser(byte[] originalByteMap)
+    {
+        //TODO write an algorithm of pixels brightness normalasing
+        List<Pixel> origin = Сache.getPixelMap();
+        byte[] result = new byte[originalByteMap.Length];
+        byte[] BrightnessMap = new byte[256];
+        double averageStaticticCountOfBrightness = 0;
+        for (int index = 0; index < origin.Count; index++) BrightnessMap[(int)origin[index].getBrightness()]++;
+
+        
+
+        return result;
     }
     
     private byte[] graphNormiliser(byte[] originalByteMap, double coeff)
     {
-        List<Pixel> origin = OptimisationDTO.Сache.getPixelMap();
+        List<Pixel> origin = Сache.getPixelMap();
         byte[] result = new byte[originalByteMap.Length];
         double resultedCoeff = coeff / 100;
 
@@ -110,7 +133,7 @@ public partial class EditPhotoByEcvalisation : Page
             if (mode)
             {
                 MaxValueStatistics = values.Max();
-            } else MaxValueStatistics = 2550;
+            } else MaxValueStatistics = 2550; //constant for correct visualising of average photo's graphs
             
             Border column = new Border
             {
@@ -203,8 +226,8 @@ public partial class EditPhotoByEcvalisation : Page
         imgsource.EndInit();
 
         EditedImagePreview.Source = imgsource;
-        EditedImagePreview.Width = 350;
-        EditedImagePreview.Height = 350;
+        EditedImagePreview.Width = 600;
+        EditedImagePreview.Height = 600;
         EditedImagePreview.Stretch = Stretch.Fill;
     }
 
@@ -226,19 +249,20 @@ public partial class EditPhotoByEcvalisation : Page
 
     private void ButtonMode_OnMouseUp(object sender, MouseButtonEventArgs e)
     {
-        if (mode)
+        if (GraphIsAdaptive)
         {
-            mode = false;
+            GraphIsAdaptive = false;
             ButtonMode.Background = new SolidColorBrush(Colors.Red);
         }
         else
         {
-            mode = true;
+            GraphIsAdaptive = true;
             ButtonMode.Background = new SolidColorBrush(Colors.Green);
         }
         GrapgColumns.Children.Clear();
-        drawGraph(mode);
+        drawGraph(GraphIsAdaptive);
     }
 
-    
+
+
 }

@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -21,6 +18,7 @@ public partial class ShowImportedPhoto : Page
     }
     private void drawPictureByPixels()
     {
+        
         for (int i = Сache.getPixelMap().Count-1; i >= 0; i-=500)
         {
             StackPanel bufferedLine = new StackPanel

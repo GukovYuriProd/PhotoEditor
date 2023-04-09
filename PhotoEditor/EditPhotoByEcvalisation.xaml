@@ -71,6 +71,22 @@
                         ValueChanged="AdaptiveBrightness_OnValueChanged"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Center">
+                <Border Width="180"
+                        Height="20"
+                        Background="#60F5CA"
+                        CornerRadius="5"
+                        BorderThickness="1"
+                        BorderBrush="Black"
+                        Margin="0,0,0,15"
+                        Name="RealStatisticsEcualisation"
+                        MouseUp="RealStatisticsEcualisation_OnMouseUp">
+                    <TextBlock HorizontalAlignment="Center"
+                               Text="Выровнять гистограмму"
+                               FontSize="14"/>
+                </Border>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal"
                         HorizontalAlignment="Center"
                         Margin="0,0,0,15">
                 <TextBlock FontSize="14" Text="Адаптивность графика"/>
@@ -84,7 +100,6 @@
                         Name="ButtonMode"
                         MouseUp="ButtonMode_OnMouseUp"
                         Cursor="Hand"/>
-                
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <Image Name="EditedImagePreview"/>
